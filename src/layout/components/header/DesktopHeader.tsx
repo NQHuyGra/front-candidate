@@ -9,6 +9,8 @@ import { FaAngleDown, FaAnglesRight, FaBell, FaComments } from "react-icons/fa6"
 import placeholder from "../../../assets/placeholder.webp"
 import DropdownUser from "./DropdownUser"
 
+const EMPLOYER_URL = import.meta.env.VITE_EMPLOYER_REGISTER_URL
+
 const DesktopHeader = () => {
 
     const { isAuthenticated, user } = useAuth()
@@ -38,7 +40,7 @@ const DesktopHeader = () => {
                 {isAuthenticated && !!user ? (
                     <nav className="flex items-center gap-3 text-md">
                         <Link
-                            to={import.meta.env.VITE_EMPLOYER_REGISTER_URL}
+                            to={EMPLOYER_URL}
                             className="border-r px-3 flex flex-col items-end justify-center"
                         >
                             <p className="text-[13px] text-gray-400">Bạn là nhà truyển dụng?</p>
@@ -79,7 +81,7 @@ const DesktopHeader = () => {
                             className="rounded-md px-3 py-2 font-medium border border-primary text-white bg-primary"
                         >Đăng ký</button>
                         <Link
-                            to={import.meta.env.VITE_EMPLOYER_REGISTER_URL}
+                            to={EMPLOYER_URL}
                             className="rounded-md px-3 py-2 font-medium border border-dark-400 text-white bg-dark-400"
                         >Đăng tuyển & tìm hồ sơ</Link>
                     </nav>
