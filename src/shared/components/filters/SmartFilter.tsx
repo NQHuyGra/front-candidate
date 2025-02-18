@@ -68,7 +68,7 @@ export default function SmartFilter({ value, onFilterChange }: SmartFilterProps)
                 labelRender={(option) => <span className="text-gray-500 font-medium">Lọc theo: {option.label}</span>}
             />
             <div className="flex flex-1 min-w-0 gap-3 items-center">
-                <button onClick={scrollToStart} className="p-2 rounded-full ring-1 ring-primary text-primary shrink-0">
+                <button onClick={scrollToStart} className="p-2 rounded-full ring-1 ring-primary text-primary shrink-0 hover:bg-primary hover:text-white transition-all">
                     <FaChevronLeft />
                 </button>
                 <div
@@ -77,7 +77,7 @@ export default function SmartFilter({ value, onFilterChange }: SmartFilterProps)
                 >
                     {SMART_FILTER_OPTIONS[filter.type].map((options) => 
                         <label key={options.value} className={cn(
-                            "flex items-center gap-2 py-2 px-5 rounded-full text-md font-medium text-gray-900 bg-gray-100 whitespace-nowrap",
+                            "flex items-center gap-2 py-2 px-5 rounded-full text-md font-medium text-gray-900 bg-gray-200 whitespace-nowrap hover:bg-primary hover:text-white cursor-pointer transition-all",
                             filter.value === options.value && "bg-primary text-white"
                         )}>
                             <input
@@ -90,7 +90,7 @@ export default function SmartFilter({ value, onFilterChange }: SmartFilterProps)
                         </label>
                     )}
                 </div>
-                <button onClick={scrollToEnd} className="p-2 rounded-full ring-1 ring-primary text-primary shrink-0">
+                <button onClick={scrollToEnd} className="p-2 rounded-full ring-1 ring-primary text-primary shrink-0 hover:bg-primary hover:text-white transition-all">
                     <FaChevronRight />
                 </button>
             </div>
