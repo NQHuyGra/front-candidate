@@ -11,7 +11,7 @@ const DropdownItem = ({label, path, icon: Icon}: DropdownItemPropsType) => {
             "flex items-center gap-3 p-3 rounded-md text-md transition-all bg-gray-200/50 hover:bg-gray-200 text-dark-200 hover:text-primary font-medium",
             isActive ? "text-primary" : ""
         )}>
-            {Icon ? <Icon className="text-lg !text-primary"/> : null}
+            {Icon ? <Icon className="text-lg text-primary!"/> : null}
             {label}
         </NavLink>
     )

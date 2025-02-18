@@ -17,7 +17,7 @@ const DesktopHeader = () => {
     const { openModal } = useAuthModal()
 
     return (
-        <header className="hidden lg:block w-full shadow-sm">
+        <header className="hidden lg:block w-full shadow-xs">
             <div className="container mx-auto flex justify-between items-center h-16">
                 <nav className="flex items-center gap-4">
                     <Link to="/">
