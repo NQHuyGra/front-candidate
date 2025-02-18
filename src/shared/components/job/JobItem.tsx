@@ -28,11 +28,11 @@ const JobItem = ({className, job}: JobItemProps) => {
                         <div className="job-item-title">
                             <h3>
                                 <Link to="">
-                                    <strong className="job-title text-md font-semibold hover:underline group-hover:text-primary transition-all">{job.title}</strong>
+                                    <strong className="job-title text-md font-semibold hover:underline group-hover:text-primary transition-all line-clamp-2">{job.title}</strong>
                                 </Link>
                             </h3>
                             <Link to="">
-                                <span className="company-name text-sm text-gray-500 font-medium">{job.company.name}</span>
+                                <span className="company-name text-sm text-gray-500 font-medium line-clamp-1">{job.company.name}</span>
                             </Link>
                         </div>
                     </div>

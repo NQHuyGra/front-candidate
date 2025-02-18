@@ -15,7 +15,13 @@ const JobNews = () => {
         <>
             <SmartFilter value={filter} onFilterChange={setFilter} />
             <div className="job-container flex gap-4">
-                {JOBS.map(job  => <JobItem job={job} key={job.id} />)}
+                {JOBS.map(job  => 
+                    <JobItem
+                        job={job}
+                        key={job.id}
+                        className="w-1/4"
+                    />
+                )}
             </div>
             <div className="job-pagination"></div>
         </>
