@@ -8,11 +8,9 @@ const Layout = () => {
     return (
         <>
             <Header/>
-            <main className="container mx-auto">
-                <Suspense fallback={<div>Page Loading...</div>}>
-                    <Outlet/>
-                </Suspense>
-            </main>
+            <Suspense fallback={<div>Page Loading...</div>}>
+                <Outlet/>
+            </Suspense>
             <Footer/>
         </>
     )

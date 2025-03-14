@@ -55,6 +55,8 @@ export default function SmartFilter({ value, onFilterChange }: SmartFilterProps)
         onFilterChange(newFilter);
     }
 
+    console.log(filter);
+
     return (
         <div className="flex flex-col sm:flex-row py-3 gap-6 sm:items-center">
             <Select
