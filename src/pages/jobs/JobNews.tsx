@@ -13,8 +13,6 @@ const JobNews = () => {
     })
     const [currentPage, setCurrentPage] = useState(1)
 
-    console.log(filter)
-
     return (
         <main className="container mx-auto py-5 px-3">
             <section className="w-full">
@@ -117,7 +115,6 @@ const JOBS = [
         },
         salary: "20 - 30 triệu",
         location: "Hà Nội",
-        liked: true
     },
     {
         id: "2",
@@ -129,7 +126,6 @@ const JOBS = [
         },
         salary: "20 - 30 triệu",
         location: "Hồ Chí Minh",
-        liked: false
     },
     {
         id: "3",
@@ -141,7 +137,6 @@ const JOBS = [
         },
         salary: "20 - 30 triệu",
         location: "Đà Nẵng",
-        liked: true
     },
     {
         id: "4",
@@ -153,7 +148,6 @@ const JOBS = [
         },
         salary: "20 - 30 triệu",
         location: "Hà Nội",
-        liked: false
     },
     {
         id: "5",
@@ -165,7 +159,6 @@ const JOBS = [
         },
         salary: "20 - 30 triệu",
         location: "Hồ Chí Minh",
-        liked: true
     },
     {
         id: "6",
@@ -177,7 +170,6 @@ const JOBS = [
         },
         salary: "20 - 30 triệu",
         location: "Hà Nội",
-        liked: false
     },
     {
         id: "7",
@@ -189,7 +181,6 @@ const JOBS = [
         },
         salary: "20 - 30 triệu",
         location: "Hồ Chí Minh",
-        liked: true
     },
     {
         id: "8",
@@ -201,6 +192,5 @@ const JOBS = [
         },
         salary: "20 - 30 triệu",
         location: "Đà Nẵng",
-        liked: false
     }
 ]

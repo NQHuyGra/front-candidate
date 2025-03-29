@@ -2,6 +2,7 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa6';
 import { Job } from '../../types/job';
 import { Link } from 'react-router-dom';
 import { cn } from '../../utils/cn';
+import useSavedJobs from '../../hooks/useStoredJobs';
 
 interface JobItemProps {
     className?: string;
@@ -9,6 +10,9 @@ interface JobItemProps {
 }
 
 const JobItem = ({className, job}: JobItemProps) => {
+
+    const { savedJobs, saveJob, cancelSaveJob } = useSavedJobs()
+    const isSaved = savedJobs.some((savedJob) => savedJob === job.id)
 
     return (
         <div className={cn(
@@ -44,8 +48,16 @@ const JobItem = ({className, job}: JobItemProps) => {
                         <div className="job-like">
                             <button
                                 className="text-primary border-2 border-primary size-8 rounded-full place-items-center"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    if (isSaved) {
+                                        cancelSaveJob(job.id)
+                                    } else {
+                                        saveJob(job.id)
+                                    }
+                                } }
                             >
-                                {job.liked ? <FaHeart /> : <FaRegHeart />}
+                                {isSaved ? <FaHeart /> : <FaRegHeart />}
                             </button>
                         </div>
                     </div>

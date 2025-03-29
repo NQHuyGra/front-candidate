@@ -1,15 +1,26 @@
-import { FaBusinessTime, FaClock, FaDiceD6, FaHeart, FaLocationDot, FaMedal, FaPaperPlane, FaSackDollar, FaUpRightFromSquare, FaUserGraduate, FaUserGroup } from "react-icons/fa6"
+import { FaBusinessTime, FaClock, FaDiceD6, FaHeart, FaLocationDot, FaMedal, FaPaperPlane, FaRegHeart, FaSackDollar, FaUpRightFromSquare, FaUserGraduate, FaUserGroup } from "react-icons/fa6"
 import { Link, useParams } from "react-router-dom"
 import useApplicationFormModal from "../../shared/hooks/useApplicationFormModal"
 import ApplicationFormModal from "../../shared/components/modals/ApplicationFormModal"
+import useSavedJobs from "../../shared/hooks/useStoredJobs"
 
 const JobDetails = () => {
 
     const { jobId } = useParams()
     const { openApplicationForm } = useApplicationFormModal()
+    const { savedJobs, saveJob, cancelSaveJob } = useSavedJobs()
+    const isSaved = savedJobs.some(job => job === jobId)
 
     const handleOpenApplicationForm = () => {
         openApplicationForm(jobId as string, "Nhân Viên Kinh Doanh/ Nhân Viên Tư Vấn/ Nhân Viên Telesales/ Chăm Sóc Khách Hàng")
+    }
+
+    const toggleSaveJob = () => {
+        if (isSaved) {
+            cancelSaveJob(jobId as string)
+        } else {
+            saveJob(jobId as string)
+        }
     }
 
     return (
@@ -61,9 +72,12 @@ const JobDetails = () => {
                                 <FaPaperPlane />
                                 Ứng tuyển
                             </button>
-                            <button className="flex items-center justify-center gap-2 py-2 px-5 rounded-md border border-primary text-primary font-medium w-max">
-                                <FaHeart />
-                                Lưu tin
+                            <button
+                                className="flex items-center justify-center gap-2 py-2 px-5 rounded-md border border-primary text-primary font-medium w-max"
+                                onClick={toggleSaveJob}
+                            >
+                                {isSaved ? <FaHeart /> : <FaRegHeart />}
+                                {isSaved ? "Hủy lưu tin" : "Lưu tin"}
                             </button>
                         </div>
                     </div>
@@ -114,8 +128,11 @@ const JobDetails = () => {
                             >
                                 Ứng tuyển
                             </button>
-                            <button className="py-2 px-5 rounded-md border border-primary text-primary font-medium">
-                                Lưu tin
+                            <button
+                                className="py-2 px-5 rounded-md border border-primary text-primary font-medium"
+                                onClick={toggleSaveJob}
+                            >
+                                {isSaved ? "Hủy lưu tin" : "Lưu tin"}
                             </button>
                         </div>
                     </div>
@@ -164,7 +181,7 @@ const JobDetails = () => {
                                 </tr>
                             </tbody>
                         </table>
-                        <Link to="" className="font-medium text-primary flex items-center justify-center mt-3 gap-2">Xem trang công ty <FaUpRightFromSquare /></Link>
+                        <Link to={`/cong-ty/${1}`} className="font-medium text-primary flex items-center justify-center mt-3 gap-2">Xem trang công ty <FaUpRightFromSquare /></Link>
                     </div>
                     <div className="p-4 rounded-lg border">
                         <h1 className="font-medium text-2xl text-gray-900 mb-3">Thông tin chung</h1>

@@ -6,5 +6,4 @@ export type Job = {
     company: Company
     salary: string
     location: string
-    liked: boolean
 }

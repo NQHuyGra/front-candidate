@@ -13,7 +13,7 @@ const RegisterForm = () => {
 
     return (
         <>
-            <h3 className="text-primary font-semibold text-xl text-center mb-3">Chào mừng bạn đã quay trở lại</h3>
+            <h3 className="text-primary font-semibold text-xl text-center mb-3">Chào mừng bạn đến với ...</h3>
             <p className="text-dark-200 text-center mb-3">Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự nghiệp lý tưởng</p>
             <Form
                 layout="vertical"
