@@ -111,7 +111,10 @@ const JOBS = [
         company: {
             id: "1",
             name: "Google",
-            logo: "https://via.placeholder.com/150"
+            logo: "https://via.placeholder.com/150",
+            location: "Hà Nội",
+            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
+            website: "https://www.google.com",
         },
         salary: "20 - 30 triệu",
         location: "Hà Nội",
@@ -122,7 +125,10 @@ const JOBS = [
         company: {
             id: "2",
             name: "Facebook",
-            logo: "https://via.placeholder.com/150"
+            logo: "https://via.placeholder.com/150",
+            location: "Hà Nội",
+            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
+            website: "https://www.google.com",
         },
         salary: "20 - 30 triệu",
         location: "Hồ Chí Minh",
@@ -133,7 +139,10 @@ const JOBS = [
         company: {
             id: "3",
             name: "Amazon",
-            logo: "https://via.placeholder.com/150"
+            logo: "https://via.placeholder.com/150",
+            location: "Hà Nội",
+            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
+            website: "https://www.google.com",
         },
         salary: "20 - 30 triệu",
         location: "Đà Nẵng",
@@ -144,7 +153,10 @@ const JOBS = [
         company: {
             id: "4",
             name: "Apple",
-            logo: "https://via.placeholder.com/150"
+            logo: "https://via.placeholder.com/150",
+            location: "Hà Nội",
+            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
+            website: "https://www.google.com",
         },
         salary: "20 - 30 triệu",
         location: "Hà Nội",
@@ -155,7 +167,10 @@ const JOBS = [
         company: {
             id: "5",
             name: "Microsoft",
-            logo: "https://via.placeholder.com/150"
+            logo: "https://via.placeholder.com/150",
+            location: "Hà Nội",
+            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
+            website: "https://www.google.com",
         },
         salary: "20 - 30 triệu",
         location: "Hồ Chí Minh",
@@ -166,7 +181,10 @@ const JOBS = [
         company: {
             id: "6",
             name: "Netflix",
-            logo: "https://via.placeholder.com/150"
+            logo: "https://via.placeholder.com/150",
+            location: "Hà Nội",
+            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
+            website: "https://www.google.com",
         },
         salary: "20 - 30 triệu",
         location: "Hà Nội",
@@ -177,7 +195,10 @@ const JOBS = [
         company: {
             id: "7",
             name: "Tiktok",
-            logo: "https://via.placeholder.com/150"
+            logo: "https://via.placeholder.com/150",
+            location: "Hà Nội",
+            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
+            website: "https://www.google.com",
         },
         salary: "20 - 30 triệu",
         location: "Hồ Chí Minh",
@@ -188,7 +209,10 @@ const JOBS = [
         company: {
             id: "8",
             name: "Adobe",
-            logo: "https://via.placeholder.com/150"
+            logo: "https://via.placeholder.com/150",
+            location: "Hà Nội",
+            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
+            website: "https://www.google.com",
         },
         salary: "20 - 30 triệu",
         location: "Đà Nẵng",

@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Layout from "../layout/Layout.js";
 import JobNews from "../pages/jobs/JobNews.js";
+import SavedJobs from "../pages/jobs/SavedJobs.js";
 const SearchJob = lazy(() => import("../pages/jobs/SearchJob.js"))
 const JobDetails = lazy(() => import("../pages/jobs/JobDetails.js"))
 const Companies = lazy(() => import("../pages/company/Companies.js"))
@@ -32,6 +33,11 @@ export const routes = [
                 id: 'tim-viec-lam',
                 path: 'tim-viec-lam',
                 element: <SearchJob/>
+            },
+            {
+                id: 'viec-lam-da-luu',
+                path: 'viec-lam-da-luu',
+                element: <SavedJobs/>
             },
             {
                 id: 'cong-ty',

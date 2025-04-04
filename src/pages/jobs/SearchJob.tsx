@@ -7,7 +7,6 @@ import { SALARY } from "../../shared/constants/salary"
 import { JOB_FIELDS } from "../../shared/constants/jobField"
 import { COMPANY_FIELDS } from "../../shared/constants/companyField"
 import { CITIES } from "../../shared/constants/city"
-import JobItem from "../../shared/components/job/JobItem"
 import Pagination from "../../shared/components/pagination/Pagination"
 
 const SearchJob = () => {

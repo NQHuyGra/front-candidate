@@ -30,21 +30,21 @@ const DesktopHeader = () => {
                             <NavLink
                                 to={link.path}
                                 className={({isActive}) => cn(
-                                    "p-4 font-medium text-dark-500 hover:text-primary",
+                                    "p-4 font-medium text-gray-800 hover:text-primary",
                                     isActive ? "text-primary" : ""
                                 )}
                             >{link.label}</NavLink>
                         </Popover>
                     ))}
                 </nav>
-                {isAuthenticated && !!user ? (
+                {(isAuthenticated && !!user) ? (
                     <nav className="flex items-center gap-3 text-md">
                         <Link
                             to={EMPLOYER_URL}
                             className="border-r px-3 flex flex-col items-end justify-center"
                         >
                             <p className="text-[13px] text-gray-400">Bạn là nhà truyển dụng?</p>
-                            <p className="text-md font-medium text-dark-500 flex items-center gap-1">Đăng tuyển ngay <FaAnglesRight /></p>
+                            <p className="text-md font-medium text-gray-800 flex items-center gap-1">Đăng tuyển ngay <FaAnglesRight /></p>
                         </Link>
                         <div
                             className="flex justify-center items-center w-10 h-10 rounded-full text-xl text-primary bg-primary/20"
@@ -82,7 +82,7 @@ const DesktopHeader = () => {
                         >Đăng ký</button>
                         <Link
                             to={EMPLOYER_URL}
-                            className="rounded-md px-3 py-2 font-medium border border-dark-400 text-white bg-dark-400"
+                            className="rounded-md px-3 py-2 font-medium border border-gray-800 text-white bg-gray-800"
                         >Đăng tuyển & tìm hồ sơ</Link>
                     </nav>
                 )}

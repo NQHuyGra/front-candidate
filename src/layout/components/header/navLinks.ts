@@ -1,5 +1,5 @@
 import { IconType } from "react-icons"
-import { FaArrowUpFromBracket, FaBandcamp, FaBriefcase, FaBuilding, FaChartColumn, FaMagnifyingGlass, FaRegFileLines, FaRegHeart, FaRegIdBadge } from "react-icons/fa6"
+import { FaArrowUpFromBracket, FaBandcamp, FaBriefcase, FaBuilding, FaChartColumn, FaMagnifyingGlass, FaPenToSquare, FaRegFileLines, FaRegHeart, FaRegIdBadge, FaShieldHalved } from "react-icons/fa6"
 
 export type NavLinkType = {
     id: string | number
@@ -44,7 +44,7 @@ export const NAVLINKS: NavLinkType[] = [
         ]
     },
     {
-        id: 'quan-ly-cv',
+        id: 'ho-so-cv',
         path: '/quan-ly-cv',
         label: 'Hồ sơ & CV',
         children: [
@@ -114,5 +114,22 @@ export const NAVLINKS: NavLinkType[] = [
 ]
 
 export const USERDROPDOWNLINKS: NavLinkType[] = [
-    
+    {
+        id: 'viec-lam-da-luu',
+        path: '/viec-lam-da-luu',
+        label: 'Việc làm đã lưu',
+        icon: FaRegHeart
+    },
+    {
+        id: 'cai-dat-thong-tin-ca-nhan',
+        path: '/cai-dat-thong-tin-ca-nhan',
+        label: 'Cài đặt thông tin cá nhân',
+        icon: FaPenToSquare
+    },
+    {
+        id: 'doi-mat-khau',
+        path: '/doi-mat-khau',
+        label: 'Đổi mật khẩu',
+        icon: FaShieldHalved
+    }
 ]
