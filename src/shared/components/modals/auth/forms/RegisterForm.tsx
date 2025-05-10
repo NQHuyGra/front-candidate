@@ -1,14 +1,28 @@
 import { Form, Input } from "antd"
 import { FaRegEnvelope, FaShieldHalved, FaUser } from "react-icons/fa6"
 import useAuthModal from "../../../../hooks/useAuthModal"
+import { RegisterRequest } from "../../../../types/auth"
+import { useState } from "react"
+import { registerApi } from "../../../../apis/authApi"
+import { toast } from "react-toastify"
+import { cn } from "../../../../utils/cn"
 
 const RegisterForm = () => {
 
     const { closeModal, openModal } = useAuthModal()
+    const [loading, setLoading] = useState(false)
 
-    const onSubmit = (value: any) => {
-        console.log(value)
-        closeModal()
+    const onSubmit = (value: RegisterRequest) => {
+        setLoading(true)
+        registerApi(value).then(res => {
+            toast.success(res.message ?? "Đăng ký thành công")
+            openModal('LOGIN')
+        }).catch(err => {
+            toast.error(err.response.data.message ?? err.message)
+        }).finally(() => {
+            setLoading(false)
+            closeModal()
+        })
     }
 
     return (
@@ -90,10 +104,23 @@ const RegisterForm = () => {
                     />
                 </Form.Item>
                 <Form.Item>
-                    <button type="submit" className="bg-primary flex items-center justify-center rounded-lg text-white text-base w-full px-5 py-2">Đăng ký</button>
+                    <button
+                        type="submit"
+                        className={cn(
+                            "bg-primary flex items-center justify-center rounded-lg text-white text-base w-full px-5 py-2",
+                            loading && "opacity-50 cursor-progress"
+                        )}>
+                            Đăng ký
+                        </button>
                 </Form.Item>
                 <Form.Item>
-                    <button type="button" onClick={closeModal} className="bg-gray-200 flex items-center justify-center rounded-lg text-dark-500 text-base w-full px-5 py-2">Hủy</button>
+                    <button
+                        type="button"
+                        onClick={closeModal}
+                        className="bg-gray-200 flex items-center justify-center rounded-lg text-dark-500 text-base w-full px-5 py-2"
+                    >
+                        Hủy
+                    </button>
                 </Form.Item>
             </Form>
             <p className="text-dark-500 text-center">Bạn đã có tài khoản? <button type="button" onClick={() => openModal('LOGIN')} className="text-primary">Đăng nhập ngay</button></p>
