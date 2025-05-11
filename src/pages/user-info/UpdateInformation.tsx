@@ -5,6 +5,7 @@ import { updateUserApi } from "../../shared/apis/userApi"
 import { toast } from "react-toastify"
 import { Form, Input, Select } from "antd"
 import { cn } from "../../shared/utils/cn"
+import AvatarUpload from "./AvatarUpload"
 
 const UpdateInformation = () => {
 
@@ -14,7 +15,11 @@ const UpdateInformation = () => {
 
     const onSubmit = (value: UserUpdateRequest) => {
         setLoading(true)
-        updateUserApi(value).then(res => {
+        const data: UserUpdateRequest = {
+            ...value,
+            avatar_url: avatar
+        }
+        updateUserApi(data).then(res => {
             setUser(res.result)
             toast.success("Cập nhật thông tin thành công")
         }).catch(err => {
@@ -39,6 +44,14 @@ const UpdateInformation = () => {
                         gender: user?.gender
                     }}
                 >
+                    <Form.Item
+                        label="Ảnh đại diện"
+                    >
+                        <AvatarUpload
+                            src={avatar}
+                            onChange={(e) => setAvatar(e as string)}
+                        />
+                    </Form.Item>
                     <Form.Item
                         label="Email"
                         name="email"

@@ -1,5 +1,5 @@
 import { IconType } from "react-icons"
-import { FaArrowUpFromBracket, FaBandcamp, FaBriefcase, FaBuilding, FaChartColumn, FaMagnifyingGlass, FaPenToSquare, FaRegFileLines, FaRegHeart, FaRegIdBadge, FaShieldHalved } from "react-icons/fa6"
+import { FaBandcamp, FaBriefcase, FaBuilding, FaChartColumn, FaMagnifyingGlass, FaPenToSquare, FaRegHeart, FaRegIdBadge, FaShieldHalved } from "react-icons/fa6"
 
 export type NavLinkType = {
     id: string | number
@@ -45,38 +45,20 @@ export const NAVLINKS: NavLinkType[] = [
     },
     {
         id: 'ho-so-cv',
-        path: '/quan-ly-cv',
+        path: '/quan-ly-ho-so',
         label: 'Hồ sơ & CV',
         children: [
             {
-                id: 'tao-cv',
-                path: '/tao-cv',
-                label: 'Tạo CV',
+                id: 'tao-ho-so',
+                path: '/tao-ho-so',
+                label: 'Tạo hồ sơ',
                 icon: FaRegIdBadge
             },
             {
-                id: 'tai-cv',
-                path: '/tai-cv',
-                label: 'Tải CV lên',
-                icon: FaArrowUpFromBracket
-            },
-            {
-                id: 'tao-cover-letter',
-                path: '/tao-cover-letter',
-                label: 'Tạo Cover Letter',
-                icon: FaRegFileLines
-            },
-            {
-                id: 'quan-ly-cv',
-                path: '/quan-ly-cv',
-                label: 'Quản lý CV',
+                id: 'quan-ly-ho-so',
+                path: '/ho-so-ung-vien',
+                label: 'Quản lý hồ sơ',
                 icon: FaRegIdBadge
-            },
-            {
-                id: 'quan-ly-cover-letter',
-                path: '/quan-ly-cover-letter',
-                label: 'Quản lý Cover Letter',
-                icon: FaRegFileLines
             },
         ]
     },
@@ -121,10 +103,16 @@ export const USERDROPDOWNLINKS: NavLinkType[] = [
         icon: FaRegHeart
     },
     {
-        id: 'cai-dat-thong-tin-ca-nhan',
-        path: '/cai-dat-thong-tin-ca-nhan',
+        id: 'thong-tin-ca-nhan',
+        path: '/thong-tin-ca-nhan',
         label: 'Cài đặt thông tin cá nhân',
         icon: FaPenToSquare
+    },
+    {
+        id: 'ho-so-ung-vien',
+        path: '/ho-so-ung-vien',
+        label: 'Hồ sơ ứng viên',
+        icon: FaRegIdBadge
     },
     {
         id: 'doi-mat-khau',

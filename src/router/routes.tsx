@@ -3,10 +3,15 @@ import { Navigate } from "react-router-dom";
 import Layout from "../layout/Layout.js";
 import JobNews from "../pages/jobs/JobNews.js";
 import SavedJobs from "../pages/jobs/SavedJobs.js";
+import ProtectedRoute from "../shared/components/ProtectedRoute.js";
 const SearchJob = lazy(() => import("../pages/jobs/SearchJob.js"))
 const JobDetails = lazy(() => import("../pages/jobs/JobDetails.js"))
 const Companies = lazy(() => import("../pages/company/Companies.js"))
 const CompanyDetails = lazy(() => import("../pages/company/CompanyDetails.js"))
+const UpdateInformation = lazy(() => import("../pages/user-info/UpdateInformation.js"))
+const AddProfile = lazy(() => import("../pages/profile/AddProfile.js"))
+const Profiles = lazy(() => import("../pages/profile/Profiles.js"))
+const UpdateProfile = lazy(() => import("../pages/profile/UpdateProfile.js"))
 
 export const routes = [
     { 
@@ -49,6 +54,34 @@ export const routes = [
                 path: 'cong-ty/:companyId',
                 element: <CompanyDetails/>
             },
+            {
+                id: 'thong-tin-ca-nhan',
+                path: 'thong-tin-ca-nhan',
+                element: <ProtectedRoute>
+                        <UpdateInformation />
+                    </ProtectedRoute>
+            },
+            {
+                id: 'tao-ho-so',
+                path: 'tao-ho-so',
+                element: <ProtectedRoute>
+                        <AddProfile />
+                    </ProtectedRoute>
+            },
+            {
+                id: 'ho-so-ung-vien',
+                path: 'ho-so-ung-vien',
+                element: <ProtectedRoute>
+                        <Profiles />
+                    </ProtectedRoute>
+            },
+            {
+                id: 'cap-nhat-ho-so',
+                path: 'cap-nhat-ho-so',
+                element: <ProtectedRoute>
+                        <UpdateProfile />
+                    </ProtectedRoute>
+            }
         ]
     }
 ]
