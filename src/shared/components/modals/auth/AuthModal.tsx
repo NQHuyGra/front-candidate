@@ -3,13 +3,16 @@ import useAuthModal from "../../../hooks/useAuthModal"
 import LoginForm from "./forms/LoginForm"
 import RegisterForm from "./forms/RegisterForm"
 import useAuth from "../../../hooks/useAuth"
+import { useNavigate } from "react-router-dom"
 
 const AuthModal = () => {
 
     const { logout } = useAuth()
     const { open, variant, closeModal } = useAuthModal()
+    const navigate = useNavigate()
 
     const handleLogout = () => {
+        navigate('/')
         logout()
         closeModal()
     }

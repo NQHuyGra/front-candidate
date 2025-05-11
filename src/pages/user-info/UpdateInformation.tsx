@@ -113,7 +113,7 @@ const UpdateInformation = () => {
                         <button
                             type="submit"
                             className={cn(
-                                "flex px-3 py-1 bg-primary rounded-md cursor-pointer",
+                                "flex px-3 py-1 bg-primary rounded-md cursor-pointer text-white",
                                 loading && "opacity-50 cursor-progress"
                             )}
                             disabled={loading}

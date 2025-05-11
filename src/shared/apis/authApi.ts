@@ -12,6 +12,6 @@ export const loginApi = async (value: AuthenticatedRequest) => {
 }
 
 export const registerApi = async (value: RegisterRequest) => {
-    const res = await http.post<ApiResponse<User>>("/identity/auth/register/candidate", value)
+    const res = await http.post<ApiResponse<User>>("/identity/auth/sign-up/candidate", value)
     return res.data
 }

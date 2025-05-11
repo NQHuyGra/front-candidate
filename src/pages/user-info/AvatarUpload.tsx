@@ -39,7 +39,7 @@ export default function AvatarUpload({src, onChange}: AvatarUploadProps) {
         <div className="flex items-center gap-4">
             <input
                 id="user-avatar"
-                className="hidden"
+                className="!hidden"
                 type="file"
                 onChange={handleInputChange}
             />
@@ -47,6 +47,7 @@ export default function AvatarUpload({src, onChange}: AvatarUploadProps) {
                 <div className="absolute size-28 border rounded-full">
                     <img src={preview} alt="User avatar" className="absolute object-cover size-full rounded-full"/>
                     <button
+                        type="button"
                         onClick={() => setOpen(true)}
                         className={cn(
                             "absolute justify-center items-center size-full rounded-full",

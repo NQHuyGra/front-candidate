@@ -30,6 +30,11 @@ export const deleteUser = () => {
     localStorage.removeItem(USER_KEY)
 }
 
+export const deleteAuthInfo = () => {
+    deleteToken()
+    deleteUser()
+}
+
 export const setSavedJobs = (jobs: string[]) => {
     localStorage.setItem(SAVED_JOBS_KEY, JSON.stringify(jobs))
 }

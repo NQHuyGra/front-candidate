@@ -1,5 +1,5 @@
 import axios from "axios";
-import { deleteAuthInfo, getToken } from "./storageUtils";
+import { deleteAuthInfo, getToken } from "./storageUtil";
 import { toast } from "react-toastify";
 
 const http = axios.create({
@@ -31,7 +31,7 @@ http.interceptors.response.use(
 
         if (error.response && error.response.status === 401) {
             deleteAuthInfo()
-            window.location.href = '/login'
+            window.location.href = '/'
         }
 
         toast.error(error?.response?.data?.message || error?.message)
