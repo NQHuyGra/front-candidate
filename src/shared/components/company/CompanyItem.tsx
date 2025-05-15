@@ -29,7 +29,7 @@ const CompanyItem = ({ company, className } : CompanyItemProps) => {
             </div>
             <div className="absolute rounded-lg left-4 top-28 p-2 bg-white border">
                 <img
-                    src={company.logo}
+                    src={company.logo_url}
                     alt={company.name}
                     className="size-16 rounded-md object-cover"
                 />

@@ -31,7 +31,7 @@ const CompanyCover = ({ company }: CompanyCoverProps) => {
                 </div>
             </div>
             <img
-                src={company.logo}
+                src={company.logo_url}
                 alt={company.name}
                 className="absolute size-36 object-cover border rounded-lg left-4 top-28 lg:top-32"
             />
