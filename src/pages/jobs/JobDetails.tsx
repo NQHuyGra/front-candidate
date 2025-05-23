@@ -3,33 +3,54 @@ import { Link, useParams } from "react-router-dom"
 import useApplicationFormModal from "../../shared/hooks/useApplicationFormModal"
 import ApplicationFormModal from "../../shared/components/modals/ApplicationFormModal"
 import useSavedJobs from "../../shared/hooks/useStoredJobs"
+import { useQuery } from "@tanstack/react-query"
+import { getJob } from "../../shared/apis/jobApi"
+import { EXP } from "../../shared/constants/exp"
+import dayjs from "dayjs"
+import TrustedContent from "../../shared/components/trusted-content/TrustedContent"
+import { COMPANY_FIELDS } from "../../shared/constants/companyField"
+import { RANKS } from "../../shared/constants/rank"
+import { SALARY } from "../../shared/constants/salary"
 
 const JobDetails = () => {
 
     const { jobId } = useParams()
     const { openApplicationForm } = useApplicationFormModal()
     const { savedJobs, saveJob, cancelSaveJob } = useSavedJobs()
+    const { data, isLoading, isError } = useQuery({
+        queryKey: ["job", jobId],
+        queryFn: () => getJob(jobId!),
+        enabled: !!jobId,
+        refetchOnWindowFocus: false,
+        retry: false
+    })
     const isSaved = savedJobs.some(job => job === jobId)
 
     const handleOpenApplicationForm = () => {
-        openApplicationForm(jobId as string, "Nhân Viên Kinh Doanh/ Nhân Viên Tư Vấn/ Nhân Viên Telesales/ Chăm Sóc Khách Hàng")
+        openApplicationForm(jobId!, data?.result.title!)
     }
 
     const toggleSaveJob = () => {
         if (isSaved) {
-            cancelSaveJob(jobId as string)
+            cancelSaveJob(jobId!)
         } else {
-            saveJob(jobId as string)
+            saveJob(jobId!)
         }
     }
 
     return (
         <main className="container mx-auto py-5 px-3">
-            <div className="flex flex-col lg:flex-row gap-4">
+            {isLoading && <div className="rounded-lg border p-10 flex justify-center">
+                <p className="font-bold text-gray-500 text-2xl">Đang tải...</p>
+            </div>}
+            {isError && <div className="rounded-lg border p-10 flex justify-center">
+                <p className="font-bold text-red-500 text-2xl">Có lỗi xảy ra, vui lòng thử lại sau.</p>
+            </div>}
+            {!!data?.result ? <div className="flex flex-col lg:flex-row gap-4">
                 <div className="flex flex-col gap-4 lg:w-2/3">
                     <div className="p-4 rounded-lg border">
                         <h1 className="text-2xl font-medium mb-3 text-gray-900">
-                            Nhân Viên Kinh Doanh/ Nhân Viên Tư Vấn/ Nhân Viên Telesales/ Chăm Sóc Khách Hàng (Thu Nhập 15 - 20 Triệu)
+                            {data?.result.title}
                         </h1>
                         <div className="flex gap-3 mb-3 items-center justify-between flex-wrap">
                             <div className="flex items-center gap-2">
@@ -38,7 +59,7 @@ const JobDetails = () => {
                                 </div>
                                 <div>
                                     <p className="text-gray-500">Thu nhập</p>
-                                    <p className="font-medium text-gray-900">15 - 20 triệu</p>
+                                    <p className="font-medium text-gray-900">{SALARY.find(item => item.id == data.result.salary)?.name}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
@@ -47,7 +68,7 @@ const JobDetails = () => {
                                 </div>
                                 <div>
                                     <p className="text-gray-500">Địa điểm</p>
-                                    <p className="font-medium text-gray-900">Hà Nội</p>
+                                    <p className="font-medium text-gray-900">{data?.result.location?.join(", ")}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
@@ -56,13 +77,13 @@ const JobDetails = () => {
                                 </div>
                                 <div>
                                     <p className="text-gray-500">Kinh nghiệm</p>
-                                    <p className="font-medium text-gray-900">1 năm</p>
+                                    <p className="font-medium text-gray-900">{EXP.find(item => item.id == data?.result.exp)?.name}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="flex items-center gap-2 px-3 py-0.5 mb-3 w-max text-gray-600 bg-gray-200 rounded-md">
                             <FaClock/>
-                            Hạn nộp hồ sơ: 13/04/2025
+                            Hạn nộp hồ sơ: {dayjs(data?.result.deadline).format("DD/MM/YYYY")}
                         </div>
                         <div className="flex items-center gap-3">
                             <button
@@ -86,35 +107,19 @@ const JobDetails = () => {
                             Chi tiết tin tuyển dụng
                         </h1>
                         <h3 className="text-lg font-medium text-gray-900">Mô tả công việc</h3>
-                        <p className="text-gray-900">- Gọi điện theo data có sẵn</p>
-                        <p className="text-gray-900">- Lên lịch hẹn</p>
-                        <p className="text-gray-900">- Chăm sóc khách hàng</p>
-                        <p className="text-gray-900">- Hỗ trợ khách hàng, giải đáp những thắc mắc của khách hàng</p>
-                        <p className="text-gray-900">- Hỗ trợ khách hàng tìm hiểu những giải pháp bảo vệ sức khỏe</p>
-                        <p className="text-gray-900">- Thời gian làm việc: từ thứ 2 đến thứ 7 (có thể linh động không lên công ty khi sử dụng data khách hàng tự kiếm)</p>
+                        <TrustedContent content={data?.result.description}/>
 
                         <h3 className="text-lg font-medium text-gray-900 mt-4">Yêu cầu ứng viên</h3>
-                        <p className="text-gray-900">- Có kinh nghiệm từ 1 năm trở lên</p>
-                        <p className="text-gray-900">- Có khả năng giao tiếp, nhạy bén, linh hoạt</p>
-                        <p className="text-gray-900">- Có tinh thần trách nhiệm với công việc, có khả năng làm việc độc lập và theo nhóm</p>
-
-                        <h3 className="text-lg font-medium text-gray-900 mt-4">Thu nhập</h3>
-                        <p className="text-gray-900">Thu nhập khi đạt 100% KPI: 15 - 20 triệu VND</p>
-                        <p className="text-gray-900">Lương cứng: 8 - 10 triệu VND</p>
-                        <p className="text-gray-900">Lương cứng không phụ thuộc doanh số</p>
+                        <TrustedContent content={data?.result.requirement}/>
 
                         <h3 className="text-lg font-medium text-gray-900 mt-4">Quyền lợi</h3>
-                        <p className="text-gray-900">- Thu nhập 15 - 20 triệu, bao gồm: Lương cơ bản 8 - 10 triệu + 5 - 15% hoa hồng + thưởng</p>
-                        <p className="text-gray-900">- Được tham gia các khóa đào tạo đầy đủ (nếu chưa vững kiến thức chuyên môn).</p>
-                        <p className="text-gray-900">- Không áp KPI doanh số</p>
-                        <p className="text-gray-900">- Lộ trình thăng tiến rõ ràng theo năng lực, được định hướng thăng tiến lên vị trí quản lý kinh doanh (Thu nhập 20 - 25 triệu) và từ 2 năm lên vị trí Trưởng phòng kinh doanh.</p>
-                        <p className="text-gray-900">- Môi trường thân thiện, trẻ trung, năng động, chuyên nghiệp, phát huy tối đa năng lực cá nhân.</p>
-                        <p className="text-gray-900">- Được du lịch thường niên trong và ngoài nước cùng công ty (tối thiểu 4 lần/năm – và 1 lần xuất ngoại)</p>
-                        <p className="text-gray-900">- Được thưởng nóng 1 chỉ vàng nếu tổng giá trị hợp đồng đạt 100 triệu, thưởng giai đoạn 500k/tuần từ giám đốc nếu mời được từ 3 khách hàng tới tham gia hội thảo tư vấn.</p>
-                        <p className="text-gray-900">- Được đóng BHXH, BHYT, BHTN đầy đủ.</p>
+                        <TrustedContent content={data?.result.benefit}/>
+
+                        <h3 className="text-lg font-medium text-gray-900 mt-4">Thu nhập</h3>
+                        <TrustedContent content={data?.result.salary_details}/>
 
                         <h3 className="text-lg font-medium text-gray-900 mt-4">Địa điểm làm việc</h3>
-                        <p className="text-gray-900">- Hà Nội: Tầng 3, Thăng Long Tower, 33 Mạc Thái Tổ, Yên Hòa, Cầu Giấy</p>
+                        <TrustedContent content={data?.result.location_details}/>
 
                         <h3 className="text-lg font-medium text-gray-900 mt-4">Cách thức ứng tuyển</h3>
                         <p className="text-gray-900">Ứng viên nộp hồ sơ trực tuyến bằng cách bấm Ứng tuyển ngay dưới đây.</p>
@@ -145,14 +150,14 @@ const JobDetails = () => {
                                     <td>
                                         <div className="p-3 rounded-lg border size-20">
                                             <img
-                                                src="https://i.pinimg.com/474x/b4/c5/af/b4c5af111827882a5c1549860e8edef3.jpg"
-                                                alt="Daiichi Life"
+                                                src={data?.result.company.logo_url}
+                                                alt={data?.result.company.name}
                                                 className="w-full"
                                             />
                                         </div>
                                     </td>
                                     <td>
-                                        <p className="text-gray-900 pl-3 font-medium text-xl">Daiichi Life</p>
+                                        <p className="text-gray-900 pl-3 font-medium text-xl">{data?.result.company.name}</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -160,7 +165,7 @@ const JobDetails = () => {
                                         <p className="text-gray-500 font-medium flex gap-2 items-center w-max"><FaUserGroup /> Quy mô:</p>
                                     </td>
                                     <td>
-                                        <p className="text-gray-900 pl-3">100 - 499 nhân viên</p>
+                                        <p className="text-gray-900 pl-3">{data?.result.company.size} nhân viên</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -168,7 +173,7 @@ const JobDetails = () => {
                                         <p className="text-gray-500 font-medium flex gap-2 items-center w-max"><FaDiceD6 /> Lĩnh vực:</p>
                                     </td>
                                     <td>
-                                        <p className="text-gray-900 pl-3">Bảo hiểm</p>
+                                        <p className="text-gray-900 pl-3">{data?.result.company.fields?.map(f => COMPANY_FIELDS.find(item => item.id == f)?.name).join(", ")}</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -176,7 +181,7 @@ const JobDetails = () => {
                                         <p className="text-gray-500 font-medium flex gap-2 items-center w-max"><FaLocationDot /> Địa điểm:</p>
                                     </td>
                                     <td>
-                                        <p className="text-gray-900 pl-3">Thăng Long Tower - 33 Mạc Thái Tổ, Cầu Giấy, Hà Nội</p>
+                                        <p className="text-gray-900 pl-3">{data?.result.company.address}</p>
                                     </td>
                                 </tr>
                             </tbody>
@@ -196,11 +201,11 @@ const JobDetails = () => {
                                     <td>
                                         <div className="pl-3">
                                             <p className="text-gray-500 text-md">Cấp bậc</p>
-                                            <p className="font-medium">Nhân viên</p>
+                                            <p className="font-medium">{RANKS.find(item => item.id == data?.result.rank)?.name}</p>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                {/* <tr>
                                     <td>
                                         <div className="size-12 rounded-full bg-primary flex items-center justify-center text-white my-2">
                                             <FaUserGraduate />
@@ -209,10 +214,10 @@ const JobDetails = () => {
                                     <td>
                                         <div className="pl-3">
                                             <p className="text-gray-500 text-md">Học vấn</p>
-                                            <p className="font-medium">Cao Đẳng trở lên</p>
+                                            <p className="font-medium">{}</p>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr> */}
                                 <tr>
                                     <td>
                                         <div className="size-12 rounded-full bg-primary flex items-center justify-center text-white my-2">
@@ -222,7 +227,7 @@ const JobDetails = () => {
                                     <td>
                                         <div className="pl-3">
                                             <p className="text-gray-500 text-md">Số lượng tuyển</p>
-                                            <p className="font-medium">5 người</p>
+                                            <p className="font-medium">{data?.result.number_of_recruits} người</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -235,7 +240,7 @@ const JobDetails = () => {
                                     <td>
                                         <div className="pl-3">
                                             <p className="text-gray-500 text-md">Hình thức làm việc</p>
-                                            <p className="font-medium">Toàn thời gian</p>
+                                            <p className="font-medium">{data?.result.form_of_work}</p>
                                         </div>
                                     </td>
                                 </tr>
@@ -243,7 +248,7 @@ const JobDetails = () => {
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> : <></>}
             <ApplicationFormModal/>
         </main>
     )

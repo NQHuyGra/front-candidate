@@ -3,6 +3,7 @@ import { Job } from '../../types/job';
 import { Link } from 'react-router-dom';
 import { cn } from '../../utils/cn';
 import useSavedJobs from '../../hooks/useStoredJobs';
+import { SALARY } from '../../constants/salary';
 
 interface JobItemProps {
     className?: string;
@@ -23,7 +24,7 @@ const JobItem = ({className, job}: JobItemProps) => {
                         <Link to={`/companies/${job.company.id}`}>
                             <div className="company-logo size-16 rounded-md p-2 border">
                                 <img
-                                    src={job.company.logo}
+                                    src={job.company.logo_url}
                                     alt={job.company.name}
                                     className="size-full"
                                     loading="lazy"/>
@@ -42,8 +43,12 @@ const JobItem = ({className, job}: JobItemProps) => {
                     </div>
                     <div className="job-item-footer flex justify-between items-center">
                         <div className="job-info flex gap-2 items-center">
-                            <div className="job-salary py-1 px-3 bg-gray-200 rounded-full text-[13px] text-gray-900 font-medium">{job.salary}</div>
-                            <div className="job-location  py-1 px-3 bg-gray-200 rounded-full text-[13px] text-gray-900 font-medium">{job.location}</div>
+                            <div className="job-salary py-1 px-3 bg-gray-200 rounded-full text-[13px] text-gray-900 font-medium">{SALARY.find(item => item.id == job.salary)?.name}</div>
+                            <div className="job-location  py-1 px-3 bg-gray-200 rounded-full text-[13px] text-gray-900 font-medium">{job.location.map((location, index) => {
+                                if(index < 2) return location
+                                if(index === 2) return "..."
+                                return null
+                            }).filter(item => item !== null).join(", ")}</div>
                         </div>
                         <div className="job-like">
                             <button

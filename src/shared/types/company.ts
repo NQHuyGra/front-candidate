@@ -12,6 +12,7 @@ export type Company = {
     tax_code: string
     website?: string | null
     cover_photo?: string
+    author_id: string
 }
 
 export type CompanyListItem = {

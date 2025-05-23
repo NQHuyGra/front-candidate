@@ -19,13 +19,13 @@ const JobNews = () => {
                 <h1 className="text-primary font-bold text-2xl">Việc làm tốt nhất</h1>
                 <SmartFilter value={filter} onFilterChange={setFilter} />
                 <div className="job-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {JOBS.map(job  => 
+                    {/* {JOBS.map(job  => 
                         <JobItem
                             job={job}
                             key={job.id}
                             className="w-full"
                         />
-                    )}
+                    )} */}
                 </div>
                 <Pagination currentPage={currentPage} totalPages={10} onPageChange={setCurrentPage} />
             </section>
@@ -103,118 +103,3 @@ const JobNews = () => {
 }
 
 export default JobNews
-
-const JOBS = [
-    {
-        id: "1",
-        title: "Frontend Developer",
-        company: {
-            id: "1",
-            name: "Google",
-            logo: "https://via.placeholder.com/150",
-            location: "Hà Nội",
-            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
-            website: "https://www.google.com",
-        },
-        salary: "20 - 30 triệu",
-        location: "Hà Nội",
-    },
-    {
-        id: "2",
-        title: "Backend Developer",
-        company: {
-            id: "2",
-            name: "Facebook",
-            logo: "https://via.placeholder.com/150",
-            location: "Hà Nội",
-            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
-            website: "https://www.google.com",
-        },
-        salary: "20 - 30 triệu",
-        location: "Hồ Chí Minh",
-    },
-    {
-        id: "3",
-        title: "Fullstack Developer",
-        company: {
-            id: "3",
-            name: "Amazon",
-            logo: "https://via.placeholder.com/150",
-            location: "Hà Nội",
-            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
-            website: "https://www.google.com",
-        },
-        salary: "20 - 30 triệu",
-        location: "Đà Nẵng",
-    },
-    {
-        id: "4",
-        title: "Mobile Developer",
-        company: {
-            id: "4",
-            name: "Apple",
-            logo: "https://via.placeholder.com/150",
-            location: "Hà Nội",
-            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
-            website: "https://www.google.com",
-        },
-        salary: "20 - 30 triệu",
-        location: "Hà Nội",
-    },
-    {
-        id: "5",
-        title: "DevOps Engineer",
-        company: {
-            id: "5",
-            name: "Microsoft",
-            logo: "https://via.placeholder.com/150",
-            location: "Hà Nội",
-            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
-            website: "https://www.google.com",
-        },
-        salary: "20 - 30 triệu",
-        location: "Hồ Chí Minh",
-    },
-    {
-        id: "6",
-        title: "Data Engineer",
-        company: {
-            id: "6",
-            name: "Netflix",
-            logo: "https://via.placeholder.com/150",
-            location: "Hà Nội",
-            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
-            website: "https://www.google.com",
-        },
-        salary: "20 - 30 triệu",
-        location: "Hà Nội",
-    },
-    {
-        id: "7",
-        title: "Data Scientist",
-        company: {
-            id: "7",
-            name: "Tiktok",
-            logo: "https://via.placeholder.com/150",
-            location: "Hà Nội",
-            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
-            website: "https://www.google.com",
-        },
-        salary: "20 - 30 triệu",
-        location: "Hồ Chí Minh",
-    },
-    {
-        id: "8",
-        title: "UI/UX Designer",
-        company: {
-            id: "8",
-            name: "Adobe",
-            logo: "https://via.placeholder.com/150",
-            location: "Hà Nội",
-            description: "Google is a multinational technology company specializing in Internet-related services and products. It is known for its search engine, online advertising technologies, cloud computing, software, and hardware.",
-            website: "https://www.google.com",
-        },
-        salary: "20 - 30 triệu",
-        location: "Đà Nẵng",
-    }
-]
