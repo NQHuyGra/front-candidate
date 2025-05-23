@@ -64,23 +64,26 @@ export const routes = [
             {
                 id: 'tao-ho-so',
                 path: 'tao-ho-so',
-                element: <ProtectedRoute>
-                        <AddProfile />
-                    </ProtectedRoute>
+                // element: <ProtectedRoute>
+                //         <AddProfile />
+                //     </ProtectedRoute>
+                element: <AddProfile />
             },
             {
                 id: 'ho-so-ung-vien',
                 path: 'ho-so-ung-vien',
-                element: <ProtectedRoute>
-                        <Profiles />
-                    </ProtectedRoute>
+                // element: <ProtectedRoute>
+                //         <Profiles />
+                //     </ProtectedRoute>
+                element: <Profiles />
             },
             {
                 id: 'cap-nhat-ho-so',
-                path: 'cap-nhat-ho-so',
-                element: <ProtectedRoute>
-                        <UpdateProfile />
-                    </ProtectedRoute>
+                path: 'cap-nhat-ho-so/:profileId',
+                // element: <ProtectedRoute>
+                //         <UpdateProfile />
+                //     </ProtectedRoute>
+                element: <UpdateProfile />
             }
         ]
     }
