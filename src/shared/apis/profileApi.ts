@@ -22,8 +22,9 @@ export const getProfile = async (id: string) => {
     return data
 }
 
-export const getProfiles = async (
+export const getProfilesWithPage = async (
     params: {
+                search: string,
                 page: number,
                 size: number,
                 sortBy: string,
@@ -34,5 +35,10 @@ export const getProfiles = async (
         profiles: Profile[]
     }>>('/profile/my-profiles', { params })
 
+    return data
+}
+
+export const getAllProfiles = async () => {
+    const { data } = await http.get<ApiResponse<Profile[]>>('/profile/my-all-profiles')
     return data
 }

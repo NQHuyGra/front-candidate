@@ -5,6 +5,9 @@ import Pagination from "../../shared/components/pagination/Pagination"
 import { Form, Input } from "antd"
 import { Link } from "react-router-dom"
 import ConfirmationModal from "../../shared/components/modals/ConfirmationModal"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { deleteProfile, getProfilesWithPage } from "../../shared/apis/profileApi"
+import { toast } from "react-toastify"
 
 const Profiles = () => {
 
@@ -14,6 +17,31 @@ const Profiles = () => {
         open: false,
         id: ''
     })
+    const queryClient = useQueryClient()
+    const {data, isLoading, isError } = useQuery({
+        queryKey: ['my-profiles', page, search],
+        queryFn: () => getProfilesWithPage({
+            page: page - 1,
+            size: 6,
+            sortBy: 'updatedAt',
+            direction: 'desc',
+            search
+        }),
+        retry: 0
+    })
+
+    const deleteMutation = useMutation({
+        mutationFn: (id: string) => deleteProfile(id),
+        onSuccess: (data) => {
+            queryClient.invalidateQueries({queryKey: ['my-profiles']})
+            queryClient.invalidateQueries({queryKey: ['all-profiles']})
+            setOpenDelete({
+                open: false,
+                id: ''
+            })
+            toast.success(data.message ?? 'Xóa hồ sơ thành công!')
+        }
+    })
     
     const handleSearch = (value: { search: string}) => {
         setPage(1)
@@ -21,7 +49,9 @@ const Profiles = () => {
     }
 
     const handleDelete = () => {
-
+        if(openDelete.id) {
+            deleteMutation.mutate(openDelete.id)
+        }
     }
 
     return (
@@ -62,10 +92,13 @@ const Profiles = () => {
                         </Form.Item>
                     </div>
                 </Form>
+                {isLoading && <p className="w-full text-center font-bold text-2xl text-gray-500 py-10">Đang tải...</p>}
+                {isError && <p className="w-full text-center font-bold text-2xl text-red-500 py-10">Có lỗi xảy ra, vui lòng thử lại sau.</p>}
+                {data?.result.profiles.length === 0 && <p className="w-full text-center font-bold text-2xl text-gray-500 py-10">Chưa có hồ sơ.</p>}
                 <div
                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
                 >
-                    {PROFILES.map(profile  => 
+                    {data?.result.profiles.map(profile  => 
                         <ProfileItem
                             profile={profile}
                             key={profile.id}
@@ -80,11 +113,11 @@ const Profiles = () => {
                 <Pagination
                     onPageChange={setPage}
                     currentPage={page}
-                    totalPages={0}
+                    totalPages={data?.result.totalPages!}
                 />
                 <ConfirmationModal
                     title={"Xóa hồ sơ"}
-                    description={`Bạn chắc chắn muốn xóa hồ sơ "${PROFILES.find(_ => _.id === openDelete.id)?.name}"`}
+                    description={`Bạn chắc chắn muốn xóa hồ sơ "${data?.result.profiles.find(_ => _.id === openDelete.id)?.name}"`}
                     isOpen={openDelete.open}
                     onConfirm={handleDelete}
                     onClose={() => setOpenDelete({
@@ -101,28 +134,3 @@ const Profiles = () => {
 }
 
 export default Profiles
-
-const PROFILES = [
-    {
-        id: "1",
-        name: "Ứng tuyển java",
-        email: "",
-        phone: "",
-        updated_at: new Date(2025, 5, 12),
-        tags: "java, intern, thực tập sinh, java-backend"
-    },
-    {
-        id: "2",
-        name: "Thực tập sinh Frontend",
-        email: "",
-        phone: "", 
-        updated_at: new Date(2025, 5, 12),
-    },
-    {
-        id: "3",
-        name: "Thực tập Backend",
-        email: "",
-        phone: "", 
-        updated_at: new Date(2025, 5, 12),
-    }
-] as Profile[]
