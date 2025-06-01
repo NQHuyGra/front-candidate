@@ -12,6 +12,7 @@ const UpdateInformation = lazy(() => import("../pages/user-info/UpdateInformatio
 const AddProfile = lazy(() => import("../pages/profile/AddProfile.js"))
 const Profiles = lazy(() => import("../pages/profile/Profiles.js"))
 const UpdateProfile = lazy(() => import("../pages/profile/UpdateProfile.js"))
+const AppliedJobs = lazy(() => import("../pages/jobs/AppliedJobs.js"))
 
 export const routes = [
     { 
@@ -43,6 +44,14 @@ export const routes = [
                 id: 'viec-lam-da-luu',
                 path: 'viec-lam-da-luu',
                 element: <SavedJobs/>
+            },
+            {
+                id: 'viec-lam-da-ung-tuyen',
+                path: 'viec-lam-da-ung-tuyen',
+                // element: <ProtectedRoute>
+                //         <AppliedJobs />
+                //     </ProtectedRoute>
+                element: <AppliedJobs/>
             },
             {
                 id: 'cong-ty',

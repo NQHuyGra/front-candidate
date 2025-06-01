@@ -11,6 +11,7 @@ import TrustedContent from "../../shared/components/trusted-content/TrustedConte
 import { COMPANY_FIELDS } from "../../shared/constants/companyField"
 import { RANKS } from "../../shared/constants/rank"
 import { SALARY } from "../../shared/constants/salary"
+import { isAppliedByJobId } from "../../shared/apis/applyApi"
 
 const JobDetails = () => {
 
@@ -24,6 +25,13 @@ const JobDetails = () => {
         refetchOnWindowFocus: false,
         retry: false
     })
+    const { data: isApplyData } = useQuery({
+        queryKey: ['is-applied', jobId],
+        queryFn: () => isAppliedByJobId(jobId!),
+        enabled: !!jobId,
+        retry: 0
+    })
+
     const isSaved = savedJobs.some(job => job === jobId)
 
     const handleOpenApplicationForm = () => {
@@ -91,7 +99,7 @@ const JobDetails = () => {
                                 onClick={handleOpenApplicationForm}
                             >
                                 <FaPaperPlane />
-                                Ứng tuyển
+                                Ứng tuyển {isApplyData?.result ? 'lại' : ''}
                             </button>
                             <button
                                 className="flex items-center justify-center gap-2 py-2 px-5 rounded-md border border-primary text-primary font-medium w-max"
@@ -131,7 +139,7 @@ const JobDetails = () => {
                                 className="py-2 px-5 rounded-md border border-primary bg-primary text-white font-medium"
                                 onClick={handleOpenApplicationForm}
                             >
-                                Ứng tuyển
+                                Ứng tuyển {isApplyData?.result ? 'lại' : ''}
                             </button>
                             <button
                                 className="py-2 px-5 rounded-md border border-primary text-primary font-medium"

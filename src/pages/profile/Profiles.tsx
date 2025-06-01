@@ -126,6 +126,7 @@ const Profiles = () => {
                     })}
                     confirmButtonClassName="bg-red-500 text-white hover:bg-red-600"
                     confirmText="Xóa"
+                    loading={deleteMutation.isPending}
                 />
             </section>
         </main>

@@ -5,7 +5,7 @@ import { cn } from "../../utils/cn";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 export type SmartFilterType = {
-    type: "city" | "salary" | "exp" | "category";
+    type: "location" | "salary" | "exp" | "category";
     value: string | number;
 }
 
@@ -15,7 +15,7 @@ interface SmartFilterProps {
 }
 
 const FILTER_OPTIONS = [
-    {value: "city", label: "Địa điểm"},
+    {value: "location", label: "Địa điểm"},
     {value: "salary", label: "Mức lương"},
     {value: "exp", label: "Kinh nghiệm"},
     {value: "category", label: "Ngành nghề"}

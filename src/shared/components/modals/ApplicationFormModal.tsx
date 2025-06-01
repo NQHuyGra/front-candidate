@@ -2,23 +2,42 @@ import { Modal, Select } from "antd"
 import useApplicationFormModal from "../../hooks/useApplicationFormModal"
 import { FaRegIdBadge } from "react-icons/fa6"
 import { useState } from "react"
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { getAllProfiles } from "../../apis/profileApi"
+import { apply } from "../../apis/applyApi"
+import { ApiResponse } from "../../types/apiResponse"
+import { toast } from "react-toastify"
+import { RecruitmentDetails } from "../../types/recruitmentDetails"
+import { cn } from "../../utils/cn"
 
 const ApplicationFormModal = () => {
 
     const { open, jobId, jobTitle, closeApplicationForm } = useApplicationFormModal()
     const [selectedProfile, setSelectedProfile] = useState<string>('')
     const [status, setStatus] = useState<'error' | ''>('')
+    const queryClient = useQueryClient()
     const { data, isLoading, isError } = useQuery({
         queryKey: ['all-profiles'],
-        queryFn: getAllProfiles
+        queryFn: getAllProfiles,
+        retry: 0
+    })
+
+    const applyMutation = useMutation<ApiResponse<Boolean>, Error, RecruitmentDetails>({
+        mutationFn: apply,
+        onSuccess: (data) => {
+            queryClient.setQueryData(['is-applied', jobId], data)
+            queryClient.invalidateQueries({queryKey: ['applied-jobs']})
+            toast.success(data.message ?? 'Ứng tuyển thành công!')
+            closeApplicationForm()
+        }
     })
 
     const handleSubmit = () => {
         setStatus(selectedProfile ? '' : 'error')
-        // Handle submit here
-        closeApplicationForm()
+        if(selectedProfile) applyMutation.mutate({
+            job_id: jobId,
+            profile_id: selectedProfile
+        } as RecruitmentDetails)
     }
 
     return (
@@ -33,8 +52,12 @@ const ApplicationFormModal = () => {
                         onClick={closeApplicationForm}
                     >Hủy</button>
                     <button
-                        className="px-5 py-2 bg-primary text-white font-semibold rounded-lg grow"
+                        className={cn(
+                            "px-5 py-2 bg-primary text-white font-semibold rounded-lg grow",
+                            applyMutation.isPending ? 'opacity-50 cursor-progress' : ''
+                        )}
                         onClick={handleSubmit}
+                        disabled={applyMutation.isPending}
                     >Nộp hồ sơ ứng tuyển</button>
                 </div>
             }
@@ -45,9 +68,9 @@ const ApplicationFormModal = () => {
                 <FaRegIdBadge className="text-primary text-xl"/>
                 Chọn hồ sơ để ứng tuyển
             </h3>
-            {isLoading && <p className="w-full text-center font-bold text-2xl text-gray-500 py-10">Đang tải...</p>}
-            {isError && <p className="w-full text-center font-bold text-2xl text-red-500 py-10">Có lỗi xảy ra, vui lòng thử lại sau.</p>}
-            {data?.result.length === 0 && <p className="w-full text-center font-bold text-2xl text-red-500 py-10">Vui lòng tạo hồ sơ trước khi ứng tuyển!</p>}
+            {isLoading && <p className="w-full text-center font-bold text-xl text-gray-500">Đang tải...</p>}
+            {isError && <p className="w-full text-center font-bold text-xl text-red-500">Có lỗi xảy ra, vui lòng thử lại sau.</p>}
+            {data?.result.length === 0 && <p className="w-full text-center font-bold text-xl text-red-500">Vui lòng tạo hồ sơ trước khi ứng tuyển!</p>}
             {(data?.result && data?.result.length > 0) ? <form action="">
                 <div className="">
                     <label></label>

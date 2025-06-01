@@ -36,7 +36,7 @@ const JobItem = ({className, job}: JobItemProps) => {
                                     <strong className="job-title text-md font-semibold hover:underline group-hover:text-primary transition-all line-clamp-2">{job.title}</strong>
                                 </Link>
                             </h3>
-                            <Link to={`/cong-ty/${job.id}`}>
+                            <Link to={`/cong-ty/${job.company.id}`}>
                                 <span className="company-name text-sm text-gray-500 font-medium line-clamp-1">{job.company.name}</span>
                             </Link>
                         </div>

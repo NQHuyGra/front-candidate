@@ -4,28 +4,48 @@ import JobItem from "../../shared/components/job/JobItem"
 import Pagination from "../../shared/components/pagination/Pagination"
 import { Link } from "react-router-dom"
 import { FaBriefcase, FaBuilding, FaBuildingColumns, FaBullhorn, FaCalculator, FaHeadset, FaLaptopCode, FaTags } from "react-icons/fa6"
+import { getJobs } from "../../shared/apis/jobApi"
+import { JobFilterRequest } from "../../shared/types/job"
+import { useQuery } from "@tanstack/react-query"
 
 const JobNews = () => {
 
     const [filter, setFilter] = useState<SmartFilterType>({
-        type: "city",
+        type: "location",
         value: "Hà Nội"
     })
     const [currentPage, setCurrentPage] = useState(1)
+    const { data, isLoading, isError } = useQuery({
+        queryKey: ["jobs", currentPage, filter],
+        queryFn: () => getJobs({
+            page: currentPage - 1,
+            sortBy: 'updatedAt',
+            size: 6,
+            direction: "desc",
+        }, {
+            [filter.type]: filter.value
+        } as JobFilterRequest),
+        staleTime: 1000 * 60 * 5,
+        refetchOnWindowFocus: false,
+        retry: 0,
+    })
 
     return (
         <main className="container mx-auto py-5 px-3">
             <section className="w-full">
                 <h1 className="text-primary font-bold text-2xl">Việc làm tốt nhất</h1>
                 <SmartFilter value={filter} onFilterChange={setFilter} />
+                {isLoading && <p className="w-full text-center font-bold text-2xl text-gray-500 py-10">Đang tải...</p>}
+                {isError && <p className="w-full text-center font-bold text-2xl text-red-500 py-10">Có lỗi xảy ra, vui lòng thử lại sau.</p>}
+                {data?.result.jobs.length === 0 && <p className="w-full text-center font-bold text-2xl text-gray-500 py-10">Không tìm thấy công việc nào.</p>}
                 <div className="job-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {/* {JOBS.map(job  => 
+                    {data?.result.jobs.map(job  => 
                         <JobItem
                             job={job}
                             key={job.id}
                             className="w-full"
                         />
-                    )} */}
+                    )}
                 </div>
                 <Pagination currentPage={currentPage} totalPages={10} onPageChange={setCurrentPage} />
             </section>

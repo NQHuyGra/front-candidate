@@ -26,7 +26,7 @@ const MobileHeader = () => {
             <div className="container mx-auto px-3 flex justify-between items-center h-16">
                 <nav className="flex items-center gap-4">
                     <Link to="/">
-                        <h3 className="text-2xl font-bold">Logo</h3>
+                        <h3 className="text-2xl font-bold">ViecMoi</h3>
                     </Link>
                 </nav>
                 <button

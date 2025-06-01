@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 @plugin "@tailwindcss/typography";
+/* @plugin "@tailwindcss/line-clamp"; */
 
 @theme {
   --color-dark-100: #ececec;

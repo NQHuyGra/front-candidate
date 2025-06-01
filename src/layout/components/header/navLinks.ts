@@ -24,16 +24,16 @@ export const NAVLINKS: NavLinkType[] = [
                 icon: FaMagnifyingGlass
             },
             {
-                id: 'lich-su-ung-tuyen',
-                path: '/lich-su-ung-tuyen',
-                label: 'Việc làm đã ứng tuyển',
-                icon: FaBriefcase
-            },
-            {
                 id: 'viec-lam-da-luu',
                 path: '/viec-lam-da-luu',
                 label: 'Việc làm đã lưu',
                 icon: FaRegHeart
+            },
+            {
+                id: 'viec-lam-da-ung-tuyen',
+                path: '/viec-lam-da-ung-tuyen',
+                label: 'Việc làm đã ứng tuyển',
+                icon: FaBriefcase
             },
             {
                 id: 'cong-ty',
@@ -45,8 +45,8 @@ export const NAVLINKS: NavLinkType[] = [
     },
     {
         id: 'ho-so-cv',
-        path: '/quan-ly-ho-so',
-        label: 'Hồ sơ & CV',
+        path: '/ho-so-ung-vien',
+        label: 'Hồ sơ',
         children: [
             {
                 id: 'tao-ho-so',
@@ -101,6 +101,12 @@ export const USERDROPDOWNLINKS: NavLinkType[] = [
         path: '/viec-lam-da-luu',
         label: 'Việc làm đã lưu',
         icon: FaRegHeart
+    },
+    {
+        id: 'viec-lam-da-ung-tuyen',
+        path: '/viec-lam-da-ung-tuyen',
+        label: 'Việc làm đã ứng tuyển',
+        icon: FaBriefcase
     },
     {
         id: 'thong-tin-ca-nhan',
