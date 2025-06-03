@@ -48,10 +48,10 @@ export const routes = [
             {
                 id: 'viec-lam-da-ung-tuyen',
                 path: 'viec-lam-da-ung-tuyen',
-                // element: <ProtectedRoute>
-                //         <AppliedJobs />
-                //     </ProtectedRoute>
-                element: <AppliedJobs/>
+                element: <ProtectedRoute>
+                        <AppliedJobs />
+                    </ProtectedRoute>
+                // element: <AppliedJobs/>
             },
             {
                 id: 'cong-ty',
@@ -73,26 +73,26 @@ export const routes = [
             {
                 id: 'tao-ho-so',
                 path: 'tao-ho-so',
-                // element: <ProtectedRoute>
-                //         <AddProfile />
-                //     </ProtectedRoute>
-                element: <AddProfile />
+                element: <ProtectedRoute>
+                        <AddProfile />
+                    </ProtectedRoute>
+                // element: <AddProfile />
             },
             {
                 id: 'ho-so-ung-vien',
                 path: 'ho-so-ung-vien',
-                // element: <ProtectedRoute>
-                //         <Profiles />
-                //     </ProtectedRoute>
-                element: <Profiles />
+                element: <ProtectedRoute>
+                        <Profiles />
+                    </ProtectedRoute>
+                // element: <Profiles />
             },
             {
                 id: 'cap-nhat-ho-so',
                 path: 'cap-nhat-ho-so/:profileId',
-                // element: <ProtectedRoute>
-                //         <UpdateProfile />
-                //     </ProtectedRoute>
-                element: <UpdateProfile />
+                element: <ProtectedRoute>
+                        <UpdateProfile />
+                    </ProtectedRoute>
+                // element: <UpdateProfile />
             }
         ]
     }

@@ -12,10 +12,13 @@ import { COMPANY_FIELDS } from "../../shared/constants/companyField"
 import { RANKS } from "../../shared/constants/rank"
 import { SALARY } from "../../shared/constants/salary"
 import { isAppliedByJobId } from "../../shared/apis/applyApi"
+import useAuth from "../../shared/hooks/useAuth"
+import { FORM_OF_WORK } from "../../shared/constants/formOfWork"
 
 const JobDetails = () => {
 
     const { jobId } = useParams()
+    const { isAuthenticated } = useAuth()
     const { openApplicationForm } = useApplicationFormModal()
     const { savedJobs, saveJob, cancelSaveJob } = useSavedJobs()
     const { data, isLoading, isError } = useQuery({
@@ -25,10 +28,11 @@ const JobDetails = () => {
         refetchOnWindowFocus: false,
         retry: false
     })
+
     const { data: isApplyData } = useQuery({
         queryKey: ['is-applied', jobId],
         queryFn: () => isAppliedByJobId(jobId!),
-        enabled: !!jobId,
+        enabled: !!jobId && isAuthenticated,
         retry: 0
     })
 
@@ -248,7 +252,7 @@ const JobDetails = () => {
                                     <td>
                                         <div className="pl-3">
                                             <p className="text-gray-500 text-md">Hình thức làm việc</p>
-                                            <p className="font-medium">{data?.result.form_of_work}</p>
+                                            <p className="font-medium">{FORM_OF_WORK.find(item => item.id == data?.result.form_of_work)?.name}</p>
                                         </div>
                                     </td>
                                 </tr>

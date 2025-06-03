@@ -22,10 +22,10 @@ const AppliedJobs = () => {
     return (
         <main className="container mx-auto py-5 px-3">
             <section className="w-full">
-                <h1 className="text-primary font-bold text-2xl">Việc làm đã ứng tuyển</h1>
+                <h1 className="text-primary font-bold text-2xl mb-5">Việc làm đã ứng tuyển</h1>
                 {isLoading && <p className="w-full text-center font-bold text-2xl text-gray-500 py-10">Đang tải...</p>}
                 {isError && <p className="w-full text-center font-bold text-2xl text-red-500 py-10">Có lỗi xảy ra, vui lòng thử lại sau.</p>}
-                {data?.result.totalItems === 0 ? (
+                {(data?.result.totalItems === 0) ? (
                     <div className="py-20 flex flex-col gap-3 items-center justify-center">
                         <p className="text-gray-800">Bạn chưa ứng tuyển công việc nào!</p>
                         <Link
@@ -47,7 +47,7 @@ const AppliedJobs = () => {
                 )}
                 <Pagination
                     currentPage={page}
-                    totalPages={data?.result.totalPages!}
+                    totalPages={data?.result?.totalPages || 0}
                     onPageChange={setPage}
                 />
             </section>

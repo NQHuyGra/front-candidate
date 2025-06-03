@@ -35,7 +35,7 @@ const AppliedJobItem = ({ data }: AppliedJobItemProps) => {
             {data?.recruitmentDetails.status === 1 ?
             <p className="text-green-̀500">Đã nhận hồ sơ</p> : 
             data?.recruitmentDetails.status === 2 ?
-            <p className="">Bị từ chối: <span className="text-gray-800">{data?.recruitmentDetails.feedback}</span></p> :
+            <p className="text-red-500">Bị từ chối: <span className="text-gray-800">{data?.recruitmentDetails.feedback}</span></p> :
             <p className="text-gray-500">Chưa phản hồi</p>}
         </div>
     )

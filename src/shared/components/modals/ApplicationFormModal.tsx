@@ -9,9 +9,11 @@ import { ApiResponse } from "../../types/apiResponse"
 import { toast } from "react-toastify"
 import { RecruitmentDetails } from "../../types/recruitmentDetails"
 import { cn } from "../../utils/cn"
+import useAuth from "../../hooks/useAuth"
 
 const ApplicationFormModal = () => {
 
+    const { isAuthenticated } = useAuth()
     const { open, jobId, jobTitle, closeApplicationForm } = useApplicationFormModal()
     const [selectedProfile, setSelectedProfile] = useState<string>('')
     const [status, setStatus] = useState<'error' | ''>('')
@@ -19,6 +21,7 @@ const ApplicationFormModal = () => {
     const { data, isLoading, isError } = useQuery({
         queryKey: ['all-profiles'],
         queryFn: getAllProfiles,
+        enabled: isAuthenticated,
         retry: 0
     })
 
@@ -80,6 +83,7 @@ const ApplicationFormModal = () => {
                         status={status}
                         value={selectedProfile}
                         onChange={(value) => setSelectedProfile(value)}
+                        loading={isLoading}
                         options={data?.result.map(item => ({
                             label: item.name,
                             value: item.id
